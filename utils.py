@@ -22,14 +22,14 @@ def get_prime_factors(n):
 
 def get_first_n_primes(n):
     primes = [2]
-    test_num = 3
+    candidate = 3
     while len(primes) < n:
         for p in primes:
-            if test_num % p == 0:
+            if candidate % p == 0:
                 break
         else:
-            primes.append(test_num)
-        test_num += 2
+            primes.append(candidate)
+        candidate += 2
     return primes
 
 
