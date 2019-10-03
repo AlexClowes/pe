@@ -26,7 +26,8 @@ def get_factors(n):
     for i in range(1, math.floor(math.sqrt(n)) + 1):
         if n % i == 0:
             factors.append(i)
-            factors.append(n // i)
+            if i * i != n:
+                factors.append(n // i)
     return factors
 
 
