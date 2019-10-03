@@ -1,4 +1,5 @@
 import itertools
+import math
 
 
 def is_palindrome(n):
@@ -18,6 +19,15 @@ def get_prime_factors(n):
     if n > 1:
         prime_factors.append(n)
     return prime_factors
+
+
+def get_factors(n):
+    factors = []
+    for i in range(1, math.floor(math.sqrt(n)) + 1):
+        if n % i == 0:
+            factors.append(i)
+            factors.append(n // i)
+    return factors
 
 
 def get_first_n_primes(n):
