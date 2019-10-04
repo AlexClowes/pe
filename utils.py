@@ -56,3 +56,7 @@ def get_primes_up_to_n(n):
                 is_prime[mult_pos] = False
                 mult_pos += val
     return itertools.compress(candidates, is_prime)
+
+
+def is_prime(n):
+    return len(get_prime_factors(n)) == 1
