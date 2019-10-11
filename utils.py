@@ -60,3 +60,11 @@ def get_primes_up_to_n(n):
 
 def is_prime(n):
     return len(get_prime_factors(n)) == 1
+
+
+def gcd(a, b):
+    if b > a:
+        a, b = b, a
+    if b == 0:
+        return a
+    return gcd(b, a % b)

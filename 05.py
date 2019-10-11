@@ -1,9 +1,4 @@
-def gcd(a, b):
-    if b > a:
-        a, b = b, a
-    if b == 0:
-        return a
-    return gcd(b, a % b)
+from utils import gcd
 
 
 def lcm(a, b):
