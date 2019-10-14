@@ -49,6 +49,8 @@ def get_primes_up_to_n(n):
     candidates = range(2, n+1)
     is_prime = [True] * len(candidates)
     for pos, val in enumerate(candidates):
+        if val * val > n:
+            break
         # If val is prime, then all its multiples are not prime
         if is_prime[pos]:
             mult_pos = pos + val
