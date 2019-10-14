@@ -73,15 +73,20 @@ def gcd(a, b):
 
 
 _memo = {}
-def _p(k, n):
-    if k > n or k == 0:
-        return 0
-    if k == n:
-        return 1
-    if (k, n) not in _memo:
-        _memo[(k, n)] = _p(k - 1, n - 1) + _p(k, n - k)
-    return _memo[(k, n)]
-
-
 def get_partition_count(n):
-    return sum(_p(k, n) for k in range(1, n + 1))
+    if n < 0:
+        return 0
+    if n == 0:
+        return 1
+    if n not in _memo:
+        total = 0
+        k = 1
+        sign = 1
+        pent = k * (3 * k - 1) // 2
+        while n >= pent:
+            total += sign * (get_partition_count(n - pent) + get_partition_count(n - pent - k))
+            k += 1
+            pent += 3 * k - 2
+            sign *= -1
+        _memo[n] = total
+    return _memo[n]
