@@ -70,3 +70,18 @@ def gcd(a, b):
     if b == 0:
         return a
     return gcd(b, a % b)
+
+
+_memo = {}
+def _p(k, n):
+    if k > n or k == 0:
+        return 0
+    if k == n:
+        return 1
+    if (k, n) not in _memo:
+        _memo[(k, n)] = _p(k - 1, n - 1) + _p(k, n - k)
+    return _memo[(k, n)]
+
+
+def get_partition_count(n):
+    return sum(_p(k, n) for k in range(1, n + 1))
