@@ -1,20 +1,16 @@
-from fractions import Fraction
 from math import floor, sqrt
 
 
 def digit_sum(n):
-    ret = 0
-    while n > 0:
-        ret += n % 10
-        n = n // 10
-    return ret
+    return sum(map(int, str(n)))
 
 
-def square_root_digit_sum(n):
-    x = Fraction(floor(sqrt(n)))
-    while x.denominator < 10**99:
-        x = (x + n / x) / 2
-    return digit_sum(floor(x * 10 ** 99))
+def square_root_digit_sum(n, places=100):
+   p = floor(sqrt(n))
+   q = 1
+   while q < 10 ** (places - 1):
+       p, q = p * p + n * q * q, 2 * p * q
+   return digit_sum(p * 10 ** (places - 1) // q)
 
 
 def main():
