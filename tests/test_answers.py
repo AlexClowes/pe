@@ -1,10 +1,12 @@
 from importlib import import_module
+import os
 
 import pandas as pd
 import pytest
 
 
-df = pd.read_csv("tests/answers.csv")
+csv_path = os.path.join(os.path.dirname(__file__), "answers.csv")
+df = pd.read_csv(csv_path)
 
 
 @pytest.mark.parametrize("problem_no,answer", zip(df["problem_no"], df["answer"]))
