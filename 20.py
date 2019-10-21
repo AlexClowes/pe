@@ -10,7 +10,6 @@ def sum_digits(n):
 
 
 def main():
-    print(fact(100))
     print(sum_digits(fact(100)))
 
 
