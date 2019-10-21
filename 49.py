@@ -18,7 +18,10 @@ def main():
             for j in range(i + 1, len(prime_perms)):
                 pj = prime_perms[j]
                 if 2 * pj - pi in prime_perms:
-                    print(pi, pj, 2 * pj - pi, sep="")
+                    concat = str(pi) + str(pj) + str(2 * pj - pi)
+                    if concat != "148748178147":
+                        print(concat)
+                        return
 
 
 if __name__ == "__main__":
