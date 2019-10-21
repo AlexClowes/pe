@@ -11,7 +11,7 @@ def main():
             consecutive_successes += 1
         else:
             consecutive_successes = 0
-    print(*[candidate - i for i in range(target)][::-1])
+    print(candidate - 3)
 
 
 if __name__ == "__main__":
