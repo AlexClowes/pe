@@ -17,7 +17,8 @@ def main():
         length = collatz_length(i)
         if best_length < length:
             best_length = length
-            print(i, length)
+            best_i = i
+    print(best_i)
 
 
 if __name__ == "__main__":
