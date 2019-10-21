@@ -11,7 +11,8 @@ def main():
     h = next(hex_gen)
     while True:
         if t == p == h:
-            print(t)
+            if t > 40755:
+                break
             h = next(hex_gen)
         while t < p:
             t = next(tri_gen)
@@ -19,6 +20,7 @@ def main():
             p = next(pen_gen)
         while h < t:
             h = next(hex_gen)
+    print(t)
 
 
 if __name__ == "__main__":
