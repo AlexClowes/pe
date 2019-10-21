@@ -22,7 +22,7 @@ def main():
             p_c, q_c = cancel(p, q)
             if p != p_c and p * q_c == p_c * q:
                 product *= Fraction(p, q)
-    print(product)
+    print(product.denominator)
 
 
 
