@@ -14,7 +14,7 @@ def main():
         if count > best_count:
             best_count = count
             best_p = p
-    print(best_p, best_count)
+    print(best_p)
 
 
 if __name__ == "__main__":
