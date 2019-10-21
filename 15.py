@@ -6,7 +6,6 @@ def lattice_paths(n):
 
 
 def main():
-    print(lattice_paths(2))
     print(lattice_paths(20))
 
 
