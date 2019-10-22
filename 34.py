@@ -13,7 +13,7 @@ def digit_factorial_sum(n):
 
 def main():
     total = 0
-    for n in range(3, 10**7):
+    for n in range(3, 7 * fact(9)):
         if n == digit_factorial_sum(n):
             total += n
     print(total)
