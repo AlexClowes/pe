@@ -53,10 +53,8 @@ def get_primes_up_to_n(n):
             break
         # If val is prime, then all its multiples are not prime
         if is_prime[pos]:
-            mult_pos = pos + val
-            while mult_pos < len(candidates):
+            for mult_pos in range(pos + val, n-1, val):
                 is_prime[mult_pos] = False
-                mult_pos += val
     return itertools.compress(candidates, is_prime)
 
 
