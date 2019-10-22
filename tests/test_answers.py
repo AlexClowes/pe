@@ -7,13 +7,13 @@ import pytest
 
 csv_path = os.path.join(os.path.dirname(__file__), "answers.csv")
 df = pd.read_csv(csv_path)
-ids = [f"{n:02}" for n in df.values[:, 0]]
+ids = [f"{n:03}" for n in df.values[:, 0]]
 
 
 
 @pytest.mark.parametrize("problem_no, answer", df.values, ids=ids)
 def test_problem_solution(problem_no, answer, capsys):
-    import_module(f"{problem_no:02}").main()
+    import_module(f"{problem_no:03}").main()
     out, err = capsys.readouterr()
     assert out.strip() == str(answer)
     assert err == ""
