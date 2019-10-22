@@ -1,5 +1,6 @@
 def main():
-    print("By hand -> 6531031914842725")
+    # By hand
+    print("6531031914842725")
 
 
 if __name__ == "__main__":
