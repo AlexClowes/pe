@@ -61,7 +61,15 @@ def get_primes_up_to_n(n):
 
 
 def is_prime(n):
-    return len(get_prime_factors(n)) == 1
+    if n < 2:
+        return False
+    k = 2
+    while k * k <= n:
+        if n % k == 0:
+            return False
+        else:
+            k += 1
+    return True
 
 
 def gcd(a, b):
