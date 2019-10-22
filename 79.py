@@ -4,7 +4,8 @@ def get_passcodes():
 
 
 def main():
-    print("By hand -> 73162890")
+    # By hand
+    print("73162890")
 
 
 if __name__ == "__main__":
