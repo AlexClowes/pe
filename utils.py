@@ -1,6 +1,8 @@
 import itertools
 import math
 
+import numpy as np
+
 
 def is_palindrome(n):
     str_rep = str(n)
@@ -46,16 +48,15 @@ def get_first_n_primes(n):
 
 def get_primes_up_to_n(n):
     # Sieve of eratosthenes
-    candidates = range(2, n+1)
-    is_prime = [True] * len(candidates)
-    for pos, val in enumerate(candidates):
+    is_prime = np.ones(n+1, dtype=np.bool)
+    is_prime[:2] = False
+    for val in range(2, n + 1):
         if val * val > n:
             break
         # If val is prime, then all its multiples are not prime
-        if is_prime[pos]:
-            for mult_pos in range(pos + val, n-1, val):
-                is_prime[mult_pos] = False
-    return itertools.compress(candidates, is_prime)
+        if is_prime[val]:
+            is_prime[val*val::val] = False
+    return itertools.compress(range(n+1), is_prime)
 
 
 def is_prime(n):
