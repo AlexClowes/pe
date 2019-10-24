@@ -10,7 +10,6 @@ df = pd.read_csv(csv_path)
 ids = [f"{n:03}" for n in df.values[:, 0]]
 
 
-
 @pytest.mark.parametrize("problem_no, answer", df.values, ids=ids)
 def test_problem_solution(problem_no, answer, capsys):
     import_module(f"{problem_no:03}").main()
