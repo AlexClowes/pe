@@ -1,41 +1,24 @@
-from collections import defaultdict
+def main():
+    N = 10 ** 6
+    factor_sums = [0] * N
+    for i in range(1, N):
+        for j in range(2 * i, N, i):
+            factor_sums[j] += i
 
-from utils import get_factors
-
-
-fs_memo = {}
-def factor_sum(n):
-    if n not in fs_memo:
-        fs_memo[n] = sum(get_factors(n)) - n
-    return fs_memo[n]
-
-
-cl_memo = {}
-def cycle_length(n):
-    if n not in cl_memo:
+    def cycle_length(n):
         prev_seen = set()
-        fs = factor_sum(n)
+        fs = factor_sums[n]
         cycle_len = 0
         while True:
             cycle_len += 1
             if fs == n:
-                cl_memo[n] = cycle_len
-                break
-            elif fs > 10 ** 6 or fs in prev_seen:
-                cl_memo[n] = -1
-                break
+                return cycle_len
+            if fs > 10 ** 6 or fs in prev_seen:
+                return -1
             prev_seen.add(fs)
-            fs = factor_sum(fs)
-    return cl_memo[n]
+            fs = factor_sums[fs]
 
-
-def main():
-    longest_chain = 0
-    for n in range(1, 10 ** 6):
-        cl = cycle_length(n)
-        if cl > longest_chain:
-            best_n, longest_chain = n, cl
-    print(best_n)
+    print(max(range(1, N), key=cycle_length))
 
 
 if __name__ == "__main__":
