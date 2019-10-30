@@ -26,26 +26,25 @@ def find_empty_square(sudoku, start_search):
     return None
 
 
-def is_valid(sudoku, row, col, num):
+def options(sudoku, row, col):
+    ret = set(range(1, 10))
+    ret -= set(sudoku[row, :].flat)
+    ret -= set(sudoku[:, col].flat)
     box_row = (row // 3) * 3
     box_col = (col // 3) * 3
-    return (
-        num not in sudoku[row, :]
-        and num not in sudoku[:, col]
-        and num not in sudoku[box_row : box_row + 3, box_col : box_col + 3]
-    )
+    ret -= set(sudoku[box_row : box_row + 3, box_col : box_col + 3].flat)
+    return ret
 
 
 def solve(sudoku, start_search=(0,0)):
     empty_square = find_empty_square(sudoku, start_search)
     if not empty_square:
         return True
-    for n in range(1, 10):
-        if is_valid(sudoku, *empty_square, n):
-            sudoku[empty_square[0], empty_square[1]] = n
-            if solve(sudoku, start_search=empty_square):
-                return True
-            sudoku[empty_square[0], empty_square[1]] = 0
+    for n in options(sudoku, *empty_square):
+        sudoku[empty_square] = n
+        if solve(sudoku, start_search=empty_square):
+            return True
+        sudoku[empty_square] = 0
     return False
 
 
