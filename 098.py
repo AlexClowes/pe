@@ -1,16 +1,10 @@
 from itertools import combinations, permutations
 from math import floor, sqrt
 
-from tqdm import tqdm
-
 
 def get_words():
     with open("data/p098_words.txt") as f:
         return [word.strip("\"") for word in f.read().split(",")]
-
-
-#def is_square(n):
-#    return floor(sqrt(n)) ** 2 == n
 
 
 def word_2_int(word, mapping):
