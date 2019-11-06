@@ -3,15 +3,12 @@ import numpy as np
 
 def sudoku_gen():
     with open("data/p096_sudoku.txt") as f:
-        f.readline()
         sudoku = np.zeros((9, 9), dtype=np.int32)
-        for idx, line in enumerate(f, 1):
-            if idx % 10 == 0:
+        for idx, line in enumerate(f):
+            if idx % 10 != 0:
+                sudoku[idx % 10 - 1, :] = [int(n) for n in line.strip()]
+            if idx % 10 == 9:
                 yield sudoku
-            else:
-                vals = list(map(int, line.strip()))
-                sudoku[idx % 10 - 1, :] = vals
-        yield sudoku
 
 
 def find_empty_square(sudoku, start_search):
