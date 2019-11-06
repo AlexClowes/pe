@@ -21,6 +21,14 @@ def test_get_first_n_primes():
     assert utils.get_first_n_primes(10) == [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
 
 
+def test_prime_generator():
+    gen = utils.prime_generator()
+    assert 2 == next(gen)
+    assert 3 == next(gen)
+    assert 5 == next(gen)
+    assert 7 == next(gen)
+
+
 def test_get_primes_up_to_n():
     assert list(utils.get_primes_up_to_n(10)) == [2, 3, 5, 7]
     assert list(utils.get_primes_up_to_n(4)) == [2, 3]

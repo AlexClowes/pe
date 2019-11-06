@@ -34,16 +34,21 @@ def get_factors(n):
 
 
 def get_first_n_primes(n):
+    return list(itertools.islice(prime_generator(), n))
+
+
+def prime_generator():
     primes = [2]
+    yield 2
     candidate = 3
-    while len(primes) < n:
+    while True:
         for p in primes:
             if candidate % p == 0:
                 break
         else:
+            yield candidate
             primes.append(candidate)
         candidate += 2
-    return primes
 
 
 def get_primes_up_to_n(n):
