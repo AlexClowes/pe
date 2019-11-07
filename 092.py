@@ -9,8 +9,9 @@ def ends_in_89(n):
         return True
     ret = 0
     while n > 0:
-        n, r = divmod(n, 10)
+        r = n % 10
         ret += r * r
+        n //= 10
     return ends_in_89(ret)
 
 
@@ -20,4 +21,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
