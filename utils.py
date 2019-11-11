@@ -71,8 +71,10 @@ def is_prime(n):
     while k * k <= n:
         if n % k == 0:
             return False
+        if k == 2:
+            k = 3
         else:
-            k += 1
+            k += 2
     return True
 
 
