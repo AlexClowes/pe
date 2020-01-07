@@ -1,3 +1,4 @@
+from collections import Counter
 from itertools import combinations, permutations
 from math import floor, sqrt
 
@@ -16,19 +17,25 @@ def word_2_int(word, mapping):
 
 
 def main():
+    sorted_words = {word: sorted(word) for word in get_words()}
     anagram_pairs = [
-        (w1, w2) for w1, w2 in combinations(get_words(), 2)
-        if sorted(w1) == sorted(w2)
+        (w1, w2) for w1, w2 in combinations(sorted_words.keys(), 2)
+        if sorted_words[w1] == sorted_words[w2]
     ]
-    max_word_len = len(max(anagram_pairs, key=lambda p: len(p[0]))[0])
+    max_word_len = max(len(w1) for w1, w2 in anagram_pairs)
     squares = {n * n for n in range(10 ** (max_word_len // 2))}
     biggest_square = 0
     for w1, w2 in anagram_pairs:
-        uniq_chars = list(set(w1))
+        uniq_chars = set(w1)
         for digits in permutations(range(10), len(uniq_chars)):
             char_digit_mapping = dict(zip(uniq_chars, digits))
-            # No leading zeros
-            if char_digit_mapping[w1[0]] == 0 or char_digit_mapping[w2[0]] == 0:
+            # No leading zeros, last digit can't be 2, 3, 7, or 8
+            if (
+                char_digit_mapping[w1[0]] == 0
+                or char_digit_mapping[w2[0]] == 0
+                or char_digit_mapping[w1[-1]] in {2, 3, 7, 8}
+                or char_digit_mapping[w2[-1]] in {2, 3, 7, 8}
+            ):
                 continue
             n1 = word_2_int(w1, char_digit_mapping)
             if n1 not in squares:
