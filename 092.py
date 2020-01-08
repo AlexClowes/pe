@@ -1,18 +1,18 @@
-import functools
-
-
-@functools.lru_cache(maxsize=None)
+memo = {}
 def ends_in_89(n):
     if n == 1:
         return False
     if n == 89:
         return True
-    ret = 0
-    while n > 0:
-        r = n % 10
-        ret += r * r
-        n //= 10
-    return ends_in_89(ret)
+    if n not in memo:
+        digit_square_sum = 0
+        n_copy = n
+        while n_copy > 0:
+            r = n_copy % 10
+            digit_square_sum += r * r
+            n_copy //= 10
+        memo[n] = ends_in_89(digit_square_sum)
+    return memo[n]
 
 
 def main():
