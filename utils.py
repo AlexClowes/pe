@@ -1,6 +1,7 @@
 import itertools
 import math
 
+from numba import njit
 import numpy as np
 
 
@@ -64,6 +65,7 @@ def get_primes_up_to_n(n):
     return itertools.compress(range(n+1), is_prime)
 
 
+@njit
 def is_prime(n):
     if n < 2:
         return False
