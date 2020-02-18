@@ -51,3 +51,10 @@ def test_get_partition_count():
     assert utils.get_partition_count(0) == 1
     assert utils.get_partition_count(10) == 42
     assert utils.get_partition_count(50) == 204226
+
+
+def test_powmod():
+    for x in range(1, 5):
+        for y in range(1, 5):
+            for mod in range(1, 5):
+                assert utils.powmod(x, y, mod) == pow(x, y, mod)
