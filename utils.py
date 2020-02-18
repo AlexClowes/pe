@@ -106,3 +106,14 @@ def get_partition_count(n):
             sign *= -1
         _memo[n] = total
     return _memo[n]
+
+
+@njit
+def powmod(x, y, mod):
+    ret = 1
+    while y > 0:
+        if y & 1:
+            ret = ret * x % mod
+        y = y >> 1
+        x = x * x % mod
+    return ret

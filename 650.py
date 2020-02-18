@@ -1,25 +1,15 @@
 import numpy as np
-
 from numba import njit, vectorize
+
+from utils import powmod
 
 
 MOD = 10 ** 9 + 7
 
 
-@njit
-def pow(x, y, mod):
-    ret = 1
-    while y > 0:
-        if y & 1:
-            ret = ret * x % mod
-        y = y >> 1
-        x = x * x % mod
-    return ret
-
-
 @vectorize
 def inv(x, mod):
-    return pow(x, mod - 2, mod)
+    return powmod(x, mod - 2, mod)
 
 
 @njit
@@ -84,7 +74,7 @@ def S(n):
         div_sum = 1
         for i in range(len(primes)):
             if bn_prime_factors[i] > 0:
-                div_sum *= pow(primes[i], bn_prime_factors[i] + 1, MOD) - 1
+                div_sum *= powmod(primes[i], bn_prime_factors[i] + 1, MOD) - 1
                 div_sum %= MOD
                 div_sum *= inverses[i]
                 div_sum %= MOD
