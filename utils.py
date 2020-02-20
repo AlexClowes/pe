@@ -81,11 +81,9 @@ def is_prime(n):
 
 
 def gcd(a, b):
-    if b > a:
-        a, b = b, a
-    if b == 0:
-        return a
-    return gcd(b, a % b)
+    while b:
+        a, b = b, a % b
+    return a
 
 
 _memo = {}
