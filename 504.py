@@ -1,28 +1,39 @@
-from itertools import product
-from math import ceil
+from math import floor, sqrt
+
+from numba import njit
+import numpy as np
+
+from utils import gcd
 
 
-tri_memo = {}
-def lattice_points_tri(a, b):
-    if (a, b) not in tri_memo:
-        tri_memo[a, b] = tri_memo[b, a] = sum(ceil(b - b * x / a - 1) for x in range(1, a))
-    return tri_memo[a, b]
+gcd = njit()(gcd)
 
 
-def lattice_points_quad(a, b, c, d):
-    ret = -3 + a + b + c + d
-    ret += lattice_points_tri(a, b)
-    ret += lattice_points_tri(b, c)
-    ret += lattice_points_tri(c, d)
-    ret += lattice_points_tri(d, a)
-    return ret
+@njit
+def is_square(n):
+    return floor(sqrt(n)) ** 2 == n
 
 
+@njit
 def count_quadrilaterals(m):
-    squares = {n * n for n in range(2 * m)}
+    gcd_vals = np.zeros((m, m))
+    for i in range(m):
+        for j in range(m):
+            gcd_vals[i, j] = gcd(i + 1, j + 1)
+
     count = 0
-    for a, b, c, d in product(range(1, m + 1), repeat=4):
-        count += lattice_points_quad(a, b, c, d) in squares
+    for a in range(1, m + 1):
+        for b in range(1, m + 1):
+            for c in range(1, m + 1):
+                for d in range(1, m + 1):
+                    area_term = a * b + b * c + c * d + d * a
+                    edge_term = (
+                        gcd_vals[a - 1, b - 1]
+                        + gcd_vals[b - 1, c - 1]
+                        + gcd_vals[c - 1, d - 1]
+                        + gcd_vals[d - 1, a - 1]
+                    )
+                    count += is_square((area_term - edge_term) // 2 + 1)
     return count
 
 
