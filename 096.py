@@ -87,10 +87,7 @@ def solution_as_array(solution):
 
 def solve(sudoku):
     link_matrix = build_link_matrix(sudoku)
-    solutions = [sudoku + solution_as_array(sol) for sol in dlx.search(link_matrix, [])]
-    if len(solutions) > 1:
-        raise ValueError("Sudoku does not have a unique solution")
-    return solutions[0]
+    return sudoku + solution_as_array(next(dlx.search(link_matrix, [])))
 
 
 def main():
