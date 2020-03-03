@@ -1,6 +1,14 @@
-from math import ceil, log2
+from math import ceil, log
+
+from numba import njit
 
 
+@njit
+def log2(x):
+    return log(x) / log(2)
+
+
+@njit
 def p(L, n):
     lower_bound, upper_bound = log2(L), log2(L + 1)
     log210 = log2(10)
