@@ -1,8 +1,11 @@
 from math import floor, sqrt
 
+from numba import njit, jit
+
 from utils import get_primes_up_to_n
 
 
+@njit
 def get_factors(n):
     # We know that n is always even
     n //= 2
