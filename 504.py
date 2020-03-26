@@ -6,9 +6,6 @@ import numpy as np
 from utils import gcd
 
 
-gcd = njit()(gcd)
-
-
 @njit
 def is_square(n):
     return floor(sqrt(n)) ** 2 == n

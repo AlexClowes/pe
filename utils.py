@@ -80,6 +80,7 @@ def is_prime(n):
     return True
 
 
+@njit
 def gcd(a, b):
     while b:
         a, b = b, a % b
